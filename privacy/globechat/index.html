@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="index,follow">
+<title>개인정보처리방침 | GlobeChat</title>
+<style>body{margin:0;background:#fff;color:#1d1b29;font:16px/1.7 -apple-system,'Apple SD Gothic Neo','Noto Sans KR',Roboto,sans-serif}main{max-width:720px;margin:0 auto;padding:20px 18px 48px}h1{font-size:1.6em;margin:.4em 0}h2{font-size:1.12em;margin:1.6em 0 .4em}ul,ol{padding-left:1.2em}li{margin:.3em 0}a{color:#4b3fa0;word-break:break-all}.meta{color:#555;font-size:.92em}nav{text-align:right;font-size:.95em}table{border-collapse:collapse;width:100%;font-size:.92em;margin:.6em 0 1em}th,td{border:1px solid #ddd;padding:.45em .5em;vertical-align:top;text-align:left}th{background:#f6f5fb}p.note{background:#f6f5fb;padding:.7em .9em;border-radius:8px}</style>
+</head>
+<body><main>
+<nav><a href="en/" hreflang="en">English</a> · <a href="delete/">계정 삭제</a></nav>
+<h1>개인정보처리방침</h1>
+<div class="meta">
+<div>앱: GlobeChat · 패키지: com.wafflelabs.globechat</div>
+<div>운영자: 와플랩스 (WaffleLabs)</div>
+<div>시행일: 2026-11-14</div>
+<div>게시 주소: <a href="https://yu815kr-del.github.io/wafflelabs/privacy/globechat/">https://yu815kr-del.github.io/wafflelabs/privacy/globechat/</a></div>
+</div>
+<p>와플랩스(이하 “운영자”)는 GlobeChat 앱(이하 “앱”)을 운영하며, 앱이 실제로 처리하는 정보만 아래와 같이 안내합니다.</p>
+
+<section><h2>1. 처리하는 정보와 목적</h2>
+<table>
+<thead><tr><th>정보</th><th>어디에</th><th>목적</th><th>보관(목표)</th></tr></thead>
+<tbody>
+<tr><td>Google 계정 식별자(Firebase 사용자 ID), Google 계정 이메일·이름(로그인 시 Google이 Firebase Authentication에 전달)</td><td>Firebase Authentication</td><td>로그인, 계정 구분, 신고·차단 대상 식별</td><td>계정 삭제 시까지</td></tr>
+<tr><td>공개 프로필: 닉네임, 국가(직접 고름), 사용 언어, 관심사(최대 5개)</td><td>Firestore users, 대기열·대화 문서</td><td>상대에게 보여 주기, 매칭</td><td>프로필: 계정 삭제 시까지 / 대화 문서 안 사본: 아래 대화 기록 기간</td></tr>
+<tr><td>매칭 대기 정보(모드, 대기 상태, 시각)</td><td>Firestore queue</td><td>무작위 매칭</td><td>매칭되면 바로 삭제, 남은 것은 1일</td></tr>
+<tr><td>대화 기록(두 참가자 ID, 영상/텍스트 모드, 시작·종료 시각, 끝낸 사람과 이유, 되돌리기 요청·응답)</td><td>Firestore matches</td><td>대화 연결, 되돌리기, 신고 확인</td><td>90일</td></tr>
+<tr><td>연결 신호(WebRTC 연결 정보: SDP·ICE 후보 — IP 주소 포함)</td><td>Firestore matches/…/sig</td><td>두 기기의 직접 연결</td><td>1일</td></tr>
+<tr><td>텍스트 대화 메시지(500자 이하, 보낸 사람 ID, 시각)</td><td>Firestore matches/…/msg</td><td>텍스트 대화 전달</td><td>90일</td></tr>
+<tr><td>차단 목록(차단한 사람 ID, 시각)</td><td>Firestore users/{내 ID}/blocks 및 기기 안</td><td>차단한 사람과 다시 매칭되지 않게</td><td>차단 해제 또는 계정 삭제 시까지</td></tr>
+<tr><td>신고 내용(신고한 사람·대상 ID, 대화 ID, 사유, 추가 설명 300자 이하, 시각)</td><td>Firestore reports</td><td>이용 규칙 위반 확인, 안전 조치</td><td>365일</td></tr>
+</tbody>
+</table>
+<p class="note">앱은 각 문서에 만료 시각을 적어 둡니다(대기·연결 신호 1일, 대화 기록·텍스트 메시지 90일, 신고 365일). 다만 이 방침 시행일 기준으로 Firestore의 자동 삭제(TTL)는 켜져 있지 않습니다. 앱을 다시 실행하면 만료된 <strong>내 대기 문서</strong>와 <strong>내가 보낸 연결 신호</strong>만 정리됩니다. 대화 기록·텍스트 메시지·다른 사람이 관련된 신고는 자동으로 지워지지 않을 수 있으며, 운영자가 삭제하거나 자동 삭제를 켤 때까지 남아 있을 수 있습니다. 더 빠른 삭제를 원하면 <a href="mailto:yu815kr@gmail.com">yu815kr@gmail.com</a>으로 요청해 주세요.</p>
+</section>
+
+<section><h2>2. 서버에 보내지 않는 정보 (기기 안에서만 처리)</h2>
+<ul>
+<li><strong>생년월일</strong>: 휠로 고르면 기기 안에서 만 18세 이상인지 계산만 하고, 생년월일 자체는 저장하거나 보내지 않습니다. 결과(성인 확인 여부)와, 만 18세 미만이면 24시간 재확인 제한 시각만 기기에 저장합니다.</li>
+<li><strong>국가 확인</strong>: 서비스 지역 여부를 Google Play 국가(없으면 SIM 국가)로 기기 안에서 확인합니다. IP 주소나 위치는 쓰지 않으며, 확인 결과를 서버에 보내지 않습니다. 이 확인을 위해 앱에 Google Play Billing 라이브러리가 들어 있으나, <strong>인앱 구매·결제 기능은 없습니다.</strong></li>
+<li>최근 대화 목록, 대화 수·만난 나라 수, 화면 설정, 되돌리기 남은 횟수.</li>
+</ul>
+</section>
+
+<section><h2>3. 영상과 음성</h2>
+<ul>
+<li>영상·음성은 두 기기가 직접(P2P, WebRTC) 주고받으며, 운영자 서버를 거치거나 저장·녹화하지 않습니다. 전송 구간은 WebRTC 표준(DTLS-SRTP)으로 암호화됩니다.</li>
+<li>직접 연결을 위해 Google의 공개 STUN 서버(stun.l.google.com, stun1.l.google.com)를 사용합니다. 이 과정에서 STUN 서버(Google)와 대화 상대방에게 기기의 IP 주소가 전달됩니다. 위 1번의 연결 신호에도 IP 주소가 들어 있습니다.</li>
+<li>카메라·마이크 권한은 영상 대화를 처음 시작할 때만 요청하며, 텍스트 대화만 쓰면 요청하지 않습니다.</li>
+<li>연결 직후 약 1.5초는 화면을 가리지만, 이는 영상 분석이 아니며 앱은 영상 내용을 분석하지 않습니다.</li>
+</ul>
+</section>
+
+<section><h2>4. 다른 사람에게 보이는 정보</h2>
+<ul>
+<li>대화 상대에게: 닉네임, 국가, 사용 언어, 관심사, (영상 모드) 내 영상·음성, (텍스트 모드) 내가 보낸 메시지, IP 주소(연결 신호).</li>
+<li>신고 내용은 신고 대상에게 보이지 않으며 앱 안에서는 누구도 읽을 수 없고, 운영자만 확인합니다.</li>
+</ul>
+</section>
+
+<section><h2>5. 처리 위탁·국외 이전</h2>
+<table>
+<thead><tr><th>받는 곳</th><th>내용</th><th>위치</th></tr></thead>
+<tbody>
+<tr><td>Google LLC (Firebase Authentication, Cloud Firestore)</td><td>로그인, 위 1번 데이터 저장</td><td>Firestore: 대한민국 서울 리전(asia-northeast3). Firebase Authentication: Google 전 세계 인프라</td></tr>
+<tr><td>Google LLC (공개 STUN 서버)</td><td>연결 시 IP 주소</td><td>Google 전 세계 인프라</td></tr>
+<tr><td>Google Play</td><td>결제 기능 없음. Play 국가 코드 조회만</td><td>기기 안에서 Play 스토어 앱에 문의</td></tr>
+</tbody>
+</table>
+<p>광고 SDK, 분석·추적 도구는 쓰지 않으며, 정보를 판매하지 않습니다. 현재 인앱 구매도 없습니다.</p>
+</section>
+
+<section><h2>6. 이용자의 권리와 삭제</h2>
+<ul>
+<li>앱 <strong>설정 → 계정 삭제</strong>: 내 프로필, 차단 목록, 매칭 대기 문서, Firebase 로그인 계정이 즉시 삭제됩니다. 이 기기의 최근 대화·기록도 함께 지워집니다.</li>
+<li>계정 삭제 후에도 대화 기록·텍스트 메시지·연결 신호·신고 내용은 상대방 기록과 안전 조사를 위해 남습니다. 목표 보관 기간은 위 표와 같으나, 1항에 적은 대로 지금은 자동 삭제가 꺼져 있을 수 있습니다.</li>
+<li>앱이 없거나 앱에서 삭제할 수 없으면 <a href="delete/">계정 삭제 안내 페이지</a>의 방법대로, 또는 <a href="mailto:yu815kr@gmail.com">yu815kr@gmail.com</a>으로 열람·정정·삭제·처리 정지를 요청해 주세요.</li>
+<li>기기에만 있는 정보는 앱을 삭제하면 함께 지워집니다.</li>
+</ul>
+</section>
+
+<section><h2>7. 아동</h2>
+<p>GlobeChat은 <strong>만 18세 이상만</strong> 이용할 수 있습니다. 만 18세 미만으로 확인되면 이용할 수 없고, 미성년자로 의심되는 이용자는 신고 사유 ‘미성년자로 보여요’로 신고할 수 있습니다.</p>
+</section>
+
+<section><h2>8. 안전성 확보</h2>
+<p>전송 구간 암호화(HTTPS/TLS, WebRTC DTLS-SRTP), Firestore 보안 규칙으로 본인·대화 참가자만 읽기/쓰기, 신고 데이터는 앱에서 읽기 불가. 인터넷 전송의 절대적 안전을 보장할 수는 없습니다.</p>
+</section>
+
+<section><h2>9. 방침 변경</h2>
+<p>방침을 바꾸면 이 페이지에 시행일과 함께 게시하고, 중요한 변경은 앱 또는 스토어 설명으로 알립니다.</p>
+</section>
+
+<section><h2>10. 문의</h2>
+<p>와플랩스 (WaffleLabs) · 이메일: <a href="mailto:yu815kr@gmail.com">yu815kr@gmail.com</a></p>
+</section>
+</main></body>
+</html>

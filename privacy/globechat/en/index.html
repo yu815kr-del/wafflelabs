@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="index,follow">
+<title>Privacy Policy | GlobeChat</title>
+<style>body{margin:0;background:#fff;color:#1d1b29;font:16px/1.7 -apple-system,'Apple SD Gothic Neo','Noto Sans KR',Roboto,sans-serif}main{max-width:720px;margin:0 auto;padding:20px 18px 48px}h1{font-size:1.6em;margin:.4em 0}h2{font-size:1.12em;margin:1.6em 0 .4em}ul,ol{padding-left:1.2em}li{margin:.3em 0}a{color:#4b3fa0;word-break:break-all}.meta{color:#555;font-size:.92em}nav{text-align:right;font-size:.95em}table{border-collapse:collapse;width:100%;font-size:.92em;margin:.6em 0 1em}th,td{border:1px solid #ddd;padding:.45em .5em;vertical-align:top;text-align:left}th{background:#f6f5fb}p.note{background:#f6f5fb;padding:.7em .9em;border-radius:8px}</style>
+</head>
+<body><main>
+<nav><a href="../" hreflang="ko">한국어</a> · <a href="../delete/">Account deletion</a></nav>
+<h1>Privacy Policy</h1>
+<div class="meta">
+<div>App: GlobeChat · Package: com.wafflelabs.globechat</div>
+<div>Operator: WaffleLabs</div>
+<div>Effective date: 2026-11-14</div>
+<div>URL: <a href="https://yu815kr-del.github.io/wafflelabs/privacy/globechat/">https://yu815kr-del.github.io/wafflelabs/privacy/globechat/</a></div>
+</div>
+<p>WaffleLabs (“we”) operates GlobeChat. This policy lists only what the app actually processes.</p>
+
+<section><h2>1. Data we process</h2>
+<table>
+<thead><tr><th>Data</th><th>Where</th><th>Purpose</th><th>Retention (intended)</th></tr></thead>
+<tbody>
+<tr><td>Google account identifier (Firebase user ID); Google email and name passed by Google to Firebase Authentication at sign-in</td><td>Firebase Authentication</td><td>Sign-in, account identification, report/block targeting</td><td>Until account deletion</td></tr>
+<tr><td>Public profile: nickname, country (you choose), language, up to 5 interests</td><td>Firestore users, queue and chat documents</td><td>Shown to your chat partner, matching</td><td>Until account deletion (copies in chat records: chat-record period)</td></tr>
+<tr><td>Matching queue entry (mode, state, time)</td><td>Firestore queue</td><td>Random matching</td><td>Deleted on match; leftovers 1 day</td></tr>
+<tr><td>Chat records (both participants’ IDs, mode, start/end time, who ended and why, undo request/answer)</td><td>Firestore matches</td><td>Connecting chats, undo, report review</td><td>90 days</td></tr>
+<tr><td>Connection signaling (WebRTC SDP/ICE candidates — includes IP addresses)</td><td>Firestore matches/…/sig</td><td>Direct device-to-device connection</td><td>1 day</td></tr>
+<tr><td>Text chat messages (≤500 characters, sender ID, time)</td><td>Firestore matches/…/msg</td><td>Delivering text chats</td><td>90 days</td></tr>
+<tr><td>Block list (blocked user ID, time)</td><td>Firestore users/{id}/blocks and on device</td><td>Never matching blocked users again</td><td>Until unblocked or account deletion</td></tr>
+<tr><td>Reports (reporter/target IDs, chat ID, reason, optional note ≤300 characters, time)</td><td>Firestore reports</td><td>Reviewing rule violations, safety</td><td>365 days</td></tr>
+</tbody>
+</table>
+<p class="note">The app writes an expiry time on each document (queue and signaling: 1 day; chat records and text messages: 90 days; reports: 365 days). As of this policy’s effective date, Firestore time-to-live (TTL) auto-deletion is <strong>not enabled</strong>. When you reopen the app, it only cleans up your own expired queue entry and signaling messages you sent. Chat records, text messages, and reports may remain until we delete them or turn on auto-deletion. Email <a href="mailto:yu815kr@gmail.com">yu815kr@gmail.com</a> to request earlier deletion.</p>
+</section>
+
+<section><h2>2. Data kept only on your device</h2>
+<ul>
+<li><strong>Date of birth</strong> is used on-device only to check you are 18+; it is never stored or sent. Only the result (and, if under 18, a 24-hour lockout time) is kept on the device.</li>
+<li>Region eligibility is checked on-device from your Google Play country (or SIM country). We do not use IP address or location, and the result is not sent. The app includes the Google Play Billing library solely to read the Play country code; <strong>there are no in-app purchases or payments</strong>.</li>
+<li>Recent chats list, counters, display settings, remaining undos.</li>
+</ul>
+</section>
+
+<section><h2>3. Video and audio</h2>
+<ul>
+<li>Video and audio go directly between the two devices (peer-to-peer, WebRTC); they do not pass through or get stored or recorded on our servers. They are encrypted in transit (DTLS-SRTP).</li>
+<li>We use Google’s public STUN servers (stun.l.google.com, stun1.l.google.com) to establish the connection. Your IP address is visible to the STUN server (Google) and to your chat partner. Signaling data in section 1 also includes IP addresses.</li>
+<li>Camera/microphone permission is requested only when you first start a video chat.</li>
+<li>The roughly 1.5-second cover after connecting is not content analysis; the app does not analyze video.</li>
+</ul>
+</section>
+
+<section><h2>4. Visible to others</h2>
+<p>Your chat partner sees your nickname, country, language, interests, your video/audio (video mode) or messages (text mode), and your IP address via signaling. Reports are never shown to the reported user and are readable only by us.</p>
+</section>
+
+<section><h2>5. Service providers / international transfer</h2>
+<table>
+<thead><tr><th>Recipient</th><th>What</th><th>Location</th></tr></thead>
+<tbody>
+<tr><td>Google LLC (Firebase Authentication, Cloud Firestore)</td><td>Sign-in and the data in section 1</td><td>Firestore: Seoul, South Korea (asia-northeast3). Firebase Authentication: Google’s global infrastructure</td></tr>
+<tr><td>Google LLC (public STUN servers)</td><td>IP address when connecting</td><td>Google’s global infrastructure</td></tr>
+<tr><td>Google Play</td><td>No payments. Play country code lookup only</td><td>Queried on-device from the Play Store app</td></tr>
+</tbody>
+</table>
+<p>We do not use advertising, analytics, or tracking SDKs, and we do not sell data. There are currently no in-app purchases.</p>
+</section>
+
+<section><h2>6. Your rights and deletion</h2>
+<ul>
+<li><strong>Settings → Delete account</strong> immediately deletes your profile, block list, queue entry, and Firebase sign-in account. Recent chats and history on this device are also removed.</li>
+<li>Chat records, text messages, signaling data, and reports remain for the other participant and for safety review. Intended periods are in the table above, but auto-deletion may be off as described in section 1.</li>
+<li>If you do not have the app, follow the <a href="../delete/">account deletion page</a> or email <a href="mailto:yu815kr@gmail.com">yu815kr@gmail.com</a> to request access, correction, deletion, or restriction.</li>
+<li>Data kept only on the device is removed when you uninstall the app.</li>
+</ul>
+</section>
+
+<section><h2>7. Children</h2>
+<p>GlobeChat is for <strong>adults 18+ only</strong>. Users who appear to be minors can be reported (“Looks under 18”).</p>
+</section>
+
+<section><h2>8. Security</h2>
+<p>We use encryption in transit (HTTPS/TLS, WebRTC DTLS-SRTP) and Firestore security rules so that only you and your chat partner can read or write the relevant documents. Reports cannot be read in the app. We cannot guarantee absolute security of internet transmission.</p>
+</section>
+
+<section><h2>9. Changes</h2>
+<p>If we change this policy, we will post the update here with a new effective date. Material changes will also be noted in the app or the store listing.</p>
+</section>
+
+<section><h2>10. Contact</h2>
+<p>WaffleLabs · <a href="mailto:yu815kr@gmail.com">yu815kr@gmail.com</a></p>
+</section>
+</main></body>
+</html>
