@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="index,follow">
+<title>Privacy Policy | Dulman Lens</title>
+<style>body{margin:0;background:#fff;color:#1d1b29;font:16px/1.7 -apple-system,'Apple SD Gothic Neo','Noto Sans KR',Roboto,sans-serif}main{max-width:720px;margin:0 auto;padding:20px 18px 48px}h1{font-size:1.6em;margin:.4em 0}h2{font-size:1.12em;margin:1.6em 0 .4em}ul,ol{padding-left:1.2em}li{margin:.3em 0}a{color:#4b3fa0;word-break:break-all}.meta{color:#555;font-size:.92em}nav{text-align:right;font-size:.95em}table{border-collapse:collapse;width:100%;font-size:.92em;margin:.6em 0 1em}th,td{border:1px solid #ddd;padding:.45em .5em;vertical-align:top;text-align:left}th{background:#f6f5fb}p.note{background:#f6f5fb;padding:.7em .9em;border-radius:8px}</style>
+</head>
+<body><main>
+<nav><a href="../" hreflang="ko">한국어</a> · <a href="../delete/">Data deletion</a></nav>
+<h1>Privacy Policy</h1>
+<div class="meta">
+<div>App: 둘만의렌즈 (Dulman Lens) · Package: com.wafflelabs.dulmanlens</div>
+<div>Operator: WaffleLabs</div>
+<div>Applies to version: 0.3.7 (vc15)</div>
+<div>Effective date: 2026-11-14</div>
+<div>URL: <a href="https://yu815kr-del.github.io/wafflelabs/privacy/dulmanlens/">https://yu815kr-del.github.io/wafflelabs/privacy/dulmanlens/</a></div>
+</div>
+<p>WaffleLabs (“we”) operates the Dulman Lens app (the “App”) and describes only the information the App actually processes.</p>
+
+<section><h2>1. Information stored on our servers (only if you use Pair mode)</h2>
+<p>If you do not pair, nothing is written to the server. Pair mode uses Firebase Anonymous Authentication and Cloud Firestore (Seoul, asia-northeast3, project dulmanlens). We do not collect your name, email, or phone number. Only a randomly created anonymous user ID (uid) is created.</p>
+<table>
+<thead><tr><th>Data</th><th>What it is</th><th>Encryption</th><th>Retention / deletion</th></tr></thead>
+<tbody>
+<tr><td>Firebase anonymous uid</td><td>A random user ID created without an account</td><td>—</td><td>Unpairing does not delete the anonymous Auth account. Reinstalling the App creates a new uid. To delete a leftover anonymous account, email <a href="mailto:yu815kr@gmail.com">yu815kr@gmail.com</a>.</td></tr>
+<tr><td>Invites</td><td>6-digit code, creator uid, public key, expiry time</td><td>The public key is public</td><td>Deleted when used; deleted when the App checks after the 10-minute expiry</td></tr>
+<tr><td>Pair record</td><td>Both uids, both public keys, invite code, created time</td><td>Plain text for identification</td><td>Deleted with all subcollections when you unpair in the App</td></tr>
+<tr><td>Presence</td><td>Whether the App is open, and a timestamp</td><td>Plain text</td><td>Overwritten with the latest value; deleted on unpair</td></tr>
+<tr><td>Blurred thumbnails</td><td>A long-edge 96px blurred preview of a photo or video plus metadata, used as a “something is waiting” notice</td><td>Sealed with the pair key (AES-GCM, end-to-end)</td><td>Deleted when the recipient confirms the original arrived; deleted on unpair</td></tr>
+<tr><td>Receipts</td><td>A marker that an item was received (id, sender/recipient uid)</td><td>id and uid in plain text</td><td>Deleted when the sender sees the receipt; deleted on unpair</td></tr>
+<tr><td>Signaling</td><td>WebRTC SDP/ICE for a direct photo/video transfer</td><td>Sealed with the pair key</td><td>Deleted when the other side reads it; deleted on unpair</td></tr>
+<tr><td>Chat messages</td><td>Text (up to 2,000 characters) and photo messages</td><td>Sealed with the pair key (end-to-end). The server cannot read the content</td><td>Deleted from the server as soon as the recipient fetches it; deleted on unpair</td></tr>
+<tr><td>Chat acknowledgements</td><td>Message id, delivered/read</td><td>Plain text (no content)</td><td>Deleted when the sender sees the ack; deleted on unpair</td></tr>
+<tr><td>Call signaling</td><td>Call offer/answer/ICE/end/reject</td><td>Sealed with the pair key</td><td>Deleted when the other side reads it; deleted on unpair</td></tr>
+<tr><td>Notification outbox</td><td>Markers such as “paired” (uid, type, time)</td><td>Plain text (no content)</td><td>Deleted when the recipient fetches it; deleted on unpair</td></tr>
+</tbody>
+</table>
+<p>Documents may also store sender and recipient uids and a server timestamp in plain text (not the message or media content). Firestore security rules allow only the two paired users to read and write that pair’s records.</p>
+</section>
+
+<section><h2>2. Information stored only on this device</h2>
+<ul>
+<li>Photos and videos you take (in an encrypted app vault using an Android Keystore key), encrypted chat history, your presets, lock settings, an intruder photo if you turn that option on (one front-camera still, on this device only), pair private and shared keys (wrapped with Keystore), and the reason the last call ended (wrapped with the pair key and cleared on unpair).</li>
+<li>Face detection for beauty adjustment (ML Kit) runs <strong>on the device only</strong>. The App does not store or send face data. ML Kit is a Google library; any technical or usage data Google may process is governed by the <a href="https://policies.google.com/privacy">Google Privacy Policy</a>.</li>
+<li>App data is excluded from Android backup and device transfer (<code>allowBackup=false</code> and data-extraction rules that exclude backup and transfer).</li>
+<li>Originals you receive are saved to the phone album folder “둘만의렌즈”. Because they live in the system album, they are not deleted when you unpair or uninstall the App. You can delete them in the gallery.</li>
+</ul>
+</section>
+
+<section><h2>3. Original photos, videos, and calls (not stored on our servers)</h2>
+<ul>
+<li>Original photos and videos, and audio/video calls, travel directly between the two phones (WebRTC P2P). We do not upload originals to our servers. Firebase Storage is not used.</li>
+<li>Traffic between the App and Firebase is encrypted with TLS (HTTPS). The <strong>content</strong> of chat, thumbnails, and connection/call signals is end-to-end encrypted with a pair key known only to the two phones (X25519 key exchange + HKDF → AES-GCM). The server, including the operator, cannot read that content.</li>
+<li>Original files are encrypted again with the pair key, in 16 KB chunks with AES-GCM, over WebRTC (DTLS), and checked with SHA-256.</li>
+<li>Call media uses standard WebRTC encryption (DTLS-SRTP) between the phones.</li>
+<li>If the other person is offline, the sender keeps the file in an encrypted on-device queue and sends it when both are online.</li>
+<li>To help the phones find each other, the App uses Google’s public STUN servers (stun.l.google.com:19302, stun1.l.google.com:19302). Those servers see the device’s public IP address and port in order to assist connectivity; they do not see the content. No TURN (relay) server is used.</li>
+<li>Because the connection is direct, the other phone can also learn your IP address.</li>
+</ul>
+</section>
+
+<section><h2>4. Notifications</h2>
+<p>The App does <strong>not use FCM (push)</strong>. There is no firebase-messaging library and no push token. While the App is open, updates arrive in real time from Firestore. While it is closed, WorkManager checks about every 15 minutes and shows a local notification (“it may be up to 15 minutes late”; battery savers may delay this further). Notification text does not include message bodies. If the recipient’s App is closed, a call will not ring; only a missed-call notification appears.</p>
+</section>
+
+<section><h2>5. Permissions</h2>
+<table>
+<thead><tr><th>Permission</th><th>Purpose</th></tr></thead>
+<tbody>
+<tr><td>CAMERA</td><td>Taking photos and videos, video calls, and, if enabled, an intruder still after failed unlock attempts (stored only on this device)</td></tr>
+<tr><td>RECORD_AUDIO</td><td>Sound in video recordings, and audio/video calls</td></tr>
+<tr><td>MODIFY_AUDIO_SETTINGS</td><td>Switching speaker and earpiece during a call</td></tr>
+<tr><td>WRITE_EXTERNAL_STORAGE (Android 9 and earlier only, maxSdk 28)</td><td>Saving received originals to the phone album (Android 10+ uses MediaStore without this permission)</td></tr>
+<tr><td>USE_BIOMETRIC</td><td>App lock with fingerprint or face unlock</td></tr>
+<tr><td>INTERNET, ACCESS_NETWORK_STATE</td><td>Firebase (pairing, chat, signaling), P2P connections, offline status</td></tr>
+<tr><td>POST_NOTIFICATIONS</td><td>Local notifications (new messages, received photos, missed calls)</td></tr>
+</tbody>
+</table>
+<p>The App does not use location, contacts, photo-library read, or advertising ID (AD_ID) permissions. Libraries for WorkManager, Firebase, ML Kit, and biometrics may merge additional permissions at install time, such as wake lock, receive boot completed, foreground service, fingerprint (older Android), or Google services read. The App itself does not start a foreground service.</p>
+</section>
+
+<section><h2>6. Processors, ads, and payments</h2>
+<table>
+<thead><tr><th>Recipient</th><th>Data</th><th>Location</th></tr></thead>
+<tbody>
+<tr><td>Google LLC (Firebase Authentication, Cloud Firestore)</td><td>Anonymous sign-in and the data in section 1</td><td>Firestore: Seoul region (asia-northeast3). Firebase Authentication: Google’s global infrastructure</td></tr>
+<tr><td>Google LLC (public STUN servers)</td><td>IP address and port when connecting</td><td>Google’s global infrastructure</td></tr>
+<tr><td>Google LLC (ML Kit face detection)</td><td>On-device face detection. The App does not send face data</td><td>Processing is on-device. Any technical data from the Google library follows Google’s policies</td></tr>
+</tbody>
+</table>
+<p>We do not sell data or share it with third parties for advertising or analytics. <strong>There is no ads SDK, analytics SDK, in-app billing library, or AD_ID permission.</strong> The Firebase SDK may send technical information (such as SDK version and platform heartbeats) to Google.</p>
+<p class="note">The UI still shows a locked “Retro pack” message that mentions a price. There is no purchase or payment feature; those presets simply cannot be saved.</p>
+</section>
+
+<section><h2>7. Your rights and deletion</h2>
+<ul>
+<li><strong>Unpair</strong> in the App deletes the server pair record and all of its subcollections (messages, thumbnails, signaling, presence, and so on), and also deletes chat history and pair keys on both phones. The Firebase anonymous account remains.</li>
+<li>App data on this device is removed when you uninstall the App or clear its data (backups are excluded). Originals already saved to the “둘만의렌즈” album remain.</li>
+<li>If you uninstall without unpairing first, the server pair record may remain until the other person unpairs or you ask us to delete it.</li>
+<li>See the <a href="../delete/">data deletion page</a> for steps. You can also email <a href="mailto:yu815kr@gmail.com">yu815kr@gmail.com</a> to access, correct, delete, or stop processing of your information.</li>
+</ul>
+</section>
+
+<section><h2>8. Children</h2>
+<p>The App is not directed at children. We do not knowingly collect personal information from children under 14.</p>
+</section>
+
+<section><h2>9. Security</h2>
+<p>We use encryption in transit (HTTPS/TLS, WebRTC DTLS-SRTP), end-to-end encryption for chat, signals, and thumbnails, and Firestore security rules so that only the two paired users can read and write pair data. No internet transmission can be guaranteed to be perfectly secure.</p>
+</section>
+
+<section><h2>10. Changes</h2>
+<p>If we change this policy, we will post the update on this page with a new effective date. Material changes may also be announced in the App or the store listing.</p>
+</section>
+
+<section><h2>11. Contact</h2>
+<p>WaffleLabs · Email: <a href="mailto:yu815kr@gmail.com">yu815kr@gmail.com</a></p>
+</section>
+</main></body>
+</html>

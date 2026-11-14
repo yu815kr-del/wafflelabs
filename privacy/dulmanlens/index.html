@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="index,follow">
+<title>개인정보처리방침 | 둘만의렌즈</title>
+<style>body{margin:0;background:#fff;color:#1d1b29;font:16px/1.7 -apple-system,'Apple SD Gothic Neo','Noto Sans KR',Roboto,sans-serif}main{max-width:720px;margin:0 auto;padding:20px 18px 48px}h1{font-size:1.6em;margin:.4em 0}h2{font-size:1.12em;margin:1.6em 0 .4em}ul,ol{padding-left:1.2em}li{margin:.3em 0}a{color:#4b3fa0;word-break:break-all}.meta{color:#555;font-size:.92em}nav{text-align:right;font-size:.95em}table{border-collapse:collapse;width:100%;font-size:.92em;margin:.6em 0 1em}th,td{border:1px solid #ddd;padding:.45em .5em;vertical-align:top;text-align:left}th{background:#f6f5fb}p.note{background:#f6f5fb;padding:.7em .9em;border-radius:8px}</style>
+</head>
+<body><main>
+<nav><a href="en/" hreflang="en">English</a> · <a href="delete/">데이터 삭제 안내</a></nav>
+<h1>개인정보처리방침</h1>
+<div class="meta">
+<div>앱: 둘만의렌즈 · 패키지: com.wafflelabs.dulmanlens</div>
+<div>운영자: 와플랩스 (WaffleLabs)</div>
+<div>적용 버전: 0.3.7 (vc15)</div>
+<div>시행일: 2026-11-14</div>
+<div>게시 주소: <a href="https://yu815kr-del.github.io/wafflelabs/privacy/dulmanlens/">https://yu815kr-del.github.io/wafflelabs/privacy/dulmanlens/</a></div>
+</div>
+<p>와플랩스(이하 “운영자”)는 둘만의렌즈 앱(이하 “앱”)을 운영하며, 앱이 실제로 처리하는 정보만 아래와 같이 안내합니다.</p>
+
+<section><h2>1. 서버에 저장되는 정보 (둘만 모드를 켰을 때만)</h2>
+<p>짝을 맺지 않으면 서버에 아무것도 쓰지 않습니다. 둘만 모드를 쓰면 Firebase 익명 인증과 Cloud Firestore(서울 asia-northeast3, 프로젝트 dulmanlens)를 사용합니다. 이름·이메일·전화번호는 받지 않으며, 임의로 만들어진 익명 사용자 ID(uid)만 생깁니다.</p>
+<table>
+<thead><tr><th>정보</th><th>내용</th><th>암호화</th><th>보관·삭제</th></tr></thead>
+<tbody>
+<tr><td>Firebase 익명 uid</td><td>계정 없이 만들어지는 임의 사용자 ID</td><td>—</td><td>짝을 해제해도 익명 계정 자체는 Firebase Authentication에 남습니다. 앱·앱 데이터를 지우고 다시 설치하면 새 uid가 만들어집니다. 남은 익명 계정 삭제는 <a href="mailto:yu815kr@gmail.com">yu815kr@gmail.com</a>으로 요청해 주세요.</td></tr>
+<tr><td>초대(invites)</td><td>6자리 코드, 만든 사람 uid, 공개키, 만료 시각</td><td>공개키는 공개 정보</td><td>쓰이면 바로 삭제. 10분이 지나 앱이 확인하면 삭제</td></tr>
+<tr><td>짝 기록(pairs)</td><td>두 사람 uid, 두 공개키, 초대 코드, 생성 시각</td><td>식별용 평문</td><td>앱에서 짝 해제 시 하위 데이터와 함께 삭제</td></tr>
+<tr><td>접속 표시(presence)</td><td>앱이 켜져 있는지와 시각</td><td>평문</td><td>최신 값 1개로 덮어씀. 짝 해제 시 삭제</td></tr>
+<tr><td>흐린 썸네일(thumbs)</td><td>보낼 사진·영상 알림용, 긴 변 96px로 줄인 뒤 흐린 이미지와 메타</td><td>짝 키로 봉인(AES-GCM, 종단간 암호화)</td><td>받은 쪽이 원본을 받았다고 확인하면 삭제. 짝 해제 시 삭제</td></tr>
+<tr><td>받은 확인(receipts)</td><td>어떤 항목을 받았다는 표시(id, 보낸/받은 uid)</td><td>id·uid는 평문</td><td>보낸 쪽이 확인하면 삭제. 짝 해제 시 삭제</td></tr>
+<tr><td>연결 신호(signaling)</td><td>사진·영상 직접 연결(WebRTC)용 SDP/ICE</td><td>짝 키로 봉인</td><td>상대가 읽으면 바로 삭제. 짝 해제 시 삭제</td></tr>
+<tr><td>채팅 메시지(messages)</td><td>글·사진 메시지(글은 최대 2,000자)</td><td>짝 키로 봉인(종단간 암호화). 서버는 내용을 볼 수 없음</td><td>받는 쪽이 가져가면 바로 삭제(서버에는 잠깐만). 짝 해제 시 삭제</td></tr>
+<tr><td>받음·읽음 표시(chatAcks)</td><td>메시지 id, 받음/읽음</td><td>평문(내용 없음)</td><td>읽음을 보낸 쪽이 확인하면 삭제. 짝 해제 시 삭제</td></tr>
+<tr><td>통화 신호(callsig)</td><td>통화 offer/answer/ICE/종료/거절</td><td>짝 키로 봉인</td><td>상대가 읽으면 바로 삭제. 짝 해제 시 삭제</td></tr>
+<tr><td>짝 알림 대기(outbox)</td><td>‘짝 연결됨’ 같은 알림 표시(uid, 종류, 시각)</td><td>평문(내용 없음)</td><td>받은 쪽이 가져가면 삭제. 짝 해제 시 삭제</td></tr>
+</tbody>
+</table>
+<p>모든 문서에는 보낸 사람·받는 사람 uid와 서버 시각이 평문으로 남을 수 있습니다(내용은 아닙니다). Firestore 보안 규칙으로 짝을 맺은 두 사람만 해당 짝 기록을 읽고 쓸 수 있습니다.</p>
+</section>
+
+<section><h2>2. 이 기기에만 저장하는 정보</h2>
+<ul>
+<li>찍은 사진·영상(앱 전용 암호화 보관함, Android Keystore 키), 채팅 기록(암호화), 내 프리셋, 잠금 설정, 잠금 실패 시 침입자 사진(설정한 경우, 앞 카메라 한 장, 이 기기에만), 짝 개인키·공유 키(Keystore로 감쌈), 마지막 통화가 끝난 이유(짝 키로 감싸 저장, 짝 해제 시 삭제).</li>
+<li>뷰티 보정용 얼굴 검출(ML Kit)은 <strong>기기 안에서만</strong> 돌아갑니다. 앱은 얼굴 데이터를 저장하거나 서버로 보내지 않습니다. ML Kit는 Google 라이브러리이며, Google이 기술·사용 통계를 처리할 수 있는지 여부는 <a href="https://policies.google.com/privacy">Google 개인정보처리방침</a>을 따릅니다.</li>
+<li>앱 백업과 기기 옮기기에서 앱 데이터는 제외되도록 설정되어 있습니다(<code>allowBackup=false</code>, 데이터 추출 규칙으로 백업·전송 제외).</li>
+<li>짝에게 받은 원본은 사용자가 받으면 휴대폰 앨범의 ‘둘만의렌즈’ 폴더에 저장됩니다. 이 파일은 휴대폰 앨범에 있으므로, 짝을 해제하거나 앱을 지워도 자동으로 지워지지 않습니다. 갤러리에서 직접 지울 수 있습니다.</li>
+</ul>
+</section>
+
+<section><h2>3. 사진·영상 원본과 통화 (서버를 거치지 않음)</h2>
+<ul>
+<li>원본 사진·영상과 영상·음성 통화는 두 휴대폰이 직접(WebRTC P2P) 주고받으며, 운영자 서버에 원본을 올리지 않습니다. Firebase Storage는 쓰지 않습니다.</li>
+<li>앱 ↔ Firebase 구간은 TLS(HTTPS)로 암호화됩니다. 채팅·썸네일·연결/통화 신호의 <strong>내용</strong>은 두 휴대폰만 아는 짝 키(X25519 키 교환 + HKDF → AES-GCM)로 봉인한 종단간 암호화입니다. 서버(운영자 포함)는 내용을 볼 수 없습니다.</li>
+<li>사진·영상 원본은 WebRTC(DTLS) 위에서 다시 짝 키로 16KB 조각마다 AES-GCM 암호화하고 SHA-256으로 확인합니다.</li>
+<li>영상·음성 통화 미디어는 WebRTC 표준 암호화(DTLS-SRTP)로 휴대폰끼리 직접 전달됩니다.</li>
+<li>상대가 오프라인이면 보내는 휴대폰 안의 암호화된 대기함에 두었다가, 둘 다 온라인일 때 보냅니다.</li>
+<li>연결을 위해 Google 공개 STUN 서버(stun.l.google.com:19302, stun1.l.google.com:19302)를 사용합니다. STUN 서버는 연결 주소를 알려 주는 용도로 기기의 공인 IP 주소와 포트를 보게 됩니다(내용은 보지 않습니다). TURN(중계) 서버는 쓰지 않습니다.</li>
+<li>직접 연결 특성상 짝 상대 휴대폰도 내 IP 주소를 알 수 있습니다.</li>
+</ul>
+</section>
+
+<section><h2>4. 알림</h2>
+<p>앱은 <strong>FCM(푸시)을 쓰지 않습니다.</strong> firebase-messaging 라이브러리와 푸시 토큰이 없습니다. 앱이 켜져 있으면 Firestore 실시간 수신으로 바로 반영되고, 꺼져 있으면 WorkManager가 약 15분마다 확인해서 기기 안에서 알림을 띄웁니다(‘최대 15분 늦을 수 있어요’. 절전 상태면 더 늦을 수 있습니다). 알림에는 메시지 본문을 넣지 않습니다. 받는 쪽 앱이 꺼져 있으면 전화는 울리지 않고 부재중 알림만 옵니다.</p>
+</section>
+
+<section><h2>5. 권한과 목적</h2>
+<table>
+<thead><tr><th>권한</th><th>목적</th></tr></thead>
+<tbody>
+<tr><td>CAMERA</td><td>사진·영상 촬영, 영상 통화, 잠금 실패 시 침입자 사진(설정한 경우, 이 기기에만 저장)</td></tr>
+<tr><td>RECORD_AUDIO</td><td>영상 녹화 소리, 영상·음성 통화</td></tr>
+<tr><td>MODIFY_AUDIO_SETTINGS</td><td>통화 중 스피커/수화부 전환</td></tr>
+<tr><td>WRITE_EXTERNAL_STORAGE (Android 9 이하만, maxSdk 28)</td><td>받은 원본을 휴대폰 앨범에 저장(Android 10+는 권한 없이 MediaStore)</td></tr>
+<tr><td>USE_BIOMETRIC</td><td>앱 잠금(지문·얼굴 인증)</td></tr>
+<tr><td>INTERNET, ACCESS_NETWORK_STATE</td><td>Firebase(짝·채팅·신호), P2P 연결, 오프라인 표시</td></tr>
+<tr><td>POST_NOTIFICATIONS</td><td>기기 안 알림(새 메시지·받은 사진·부재중)</td></tr>
+</tbody>
+</table>
+<p>위치·연락처·사진첩 읽기 권한과 광고 ID(AD_ID) 권한은 없습니다. WorkManager·Firebase·ML Kit·생체 인증 라이브러리가 설치 시 깨우기 잠금, 부팅 완료 수신, 포그라운드 서비스, 지문 권한(구버전), Google 서비스 읽기 같은 권한을 자동으로 넣을 수 있습니다. 앱이 직접 포그라운드 서비스를 띄우지는 않습니다.</p>
+</section>
+
+<section><h2>6. 처리 위탁·국외 이전, 광고·결제</h2>
+<table>
+<thead><tr><th>받는 곳</th><th>내용</th><th>위치</th></tr></thead>
+<tbody>
+<tr><td>Google LLC (Firebase Authentication, Cloud Firestore)</td><td>익명 로그인, 위 1번 데이터 저장</td><td>Firestore: 대한민국 서울 리전(asia-northeast3). Firebase Authentication: Google 전 세계 인프라</td></tr>
+<tr><td>Google LLC (공개 STUN 서버)</td><td>연결 시 IP 주소·포트</td><td>Google 전 세계 인프라</td></tr>
+<tr><td>Google LLC (ML Kit 얼굴 검출 라이브러리)</td><td>기기 안 얼굴 검출. 앱은 얼굴 데이터를 보내지 않음</td><td>처리는 기기 안. Google 라이브러리의 기술 정보는 Google 정책을 따름</td></tr>
+</tbody>
+</table>
+<p>판매·광고·분석 목적의 제3자 공유는 없습니다. <strong>광고 SDK, 분석 SDK, 인앱결제 라이브러리, 광고 ID(AD_ID) 권한은 없습니다.</strong> Firebase SDK가 기술 정보(SDK 버전·플랫폼 같은 heartbeat)를 Google에 보낼 수 있습니다.</p>
+<p class="note">화면에는 아직 결제와 연결되지 않은 ‘레트로 팩’ 잠금 안내(금액 문구 포함)가 있습니다. 구매·결제 기능은 없으며, 해당 프리셋으로는 저장할 수 없습니다.</p>
+</section>
+
+<section><h2>7. 이용자의 권리와 삭제</h2>
+<ul>
+<li>앱에서 <strong>짝 해제</strong>: 서버의 짝 기록과 하위 데이터(메시지·썸네일·신호·접속 표시 등)가 모두 지워지고, 두 휴대폰의 대화 기록과 짝 키도 지워집니다. Firebase 익명 계정은 남아 있습니다.</li>
+<li>이 기기의 앱 데이터: 앱 삭제 또는 앱 데이터 삭제로 지워집니다(백업 제외). 다만 휴대폰 앨범 ‘둘만의렌즈’에 저장된 받은 원본은 남습니다.</li>
+<li>앱을 지우기 전에 짝을 해제하지 않으면, 서버의 짝 기록은 상대가 해제하거나 운영자에게 삭제를 요청할 때까지 남을 수 있습니다.</li>
+<li>자세한 절차는 <a href="delete/">데이터 삭제 안내</a>를 봐 주세요. 열람·정정·삭제·처리 정지는 <a href="mailto:yu815kr@gmail.com">yu815kr@gmail.com</a>으로 요청할 수 있습니다.</li>
+</ul>
+</section>
+
+<section><h2>8. 아동</h2>
+<p>앱은 아동을 주 대상으로 하지 않으며, 운영자는 만 14세 미만 아동의 개인정보를 의도적으로 수집하지 않습니다.</p>
+</section>
+
+<section><h2>9. 안전성 확보</h2>
+<p>전송 구간 암호화(HTTPS/TLS, WebRTC DTLS-SRTP), 채팅·신호·썸네일의 종단간 암호화, Firestore 보안 규칙으로 짝을 맺은 두 사람만 읽기/쓰기. 인터넷 전송의 절대적 안전을 보장할 수는 없습니다.</p>
+</section>
+
+<section><h2>10. 방침 변경</h2>
+<p>방침을 바꾸면 이 페이지에 시행일과 함께 게시하고, 중요한 변경은 앱 또는 스토어 설명으로 알립니다.</p>
+</section>
+
+<section><h2>11. 문의</h2>
+<p>와플랩스 (WaffleLabs) · 이메일: <a href="mailto:yu815kr@gmail.com">yu815kr@gmail.com</a></p>
+</section>
+</main></body>
+</html>
