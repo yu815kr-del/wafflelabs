@@ -43,11 +43,11 @@ def check(o):
         if prev is not None and r != prev + 1: raise ValueError(f"draw[{i}] sequence")
         prev = r
     if not isint(o["latestRound"]) or o["latestRound"] != prev: raise ValueError("latestRound != max(draws)")
-    # 현재 시각(KST) 상한: 토 21:00 전 회차·미래 generatedAt 거부(앱과 동일)
+    # 현재 시각(KST) 상한: 토 20:40 전 회차·미래 generatedAt 거부(앱 LottoFeed.CHECK_FROM 과 동일, 운담 vc45부터 20:40)
     now = dt.datetime.now(dt.timezone(dt.timedelta(hours=9)))
     if g > now + dt.timedelta(minutes=10): raise ValueError("generatedAt in future")
     due = (now.date() - R1).days // 7 + 1
-    if now.date() == exp(due) and now.time() < dt.time(21, 0): due -= 1
+    if now.date() == exp(due) and now.time() < dt.time(20, 40): due -= 1
     if prev > due: raise ValueError(f"round {prev} not yet due (due {due})")
     return {d["round"]: (d["numbers"], d["bonus"], d["drawDate"]) for d in ds}
 def known_from_asset(path):
